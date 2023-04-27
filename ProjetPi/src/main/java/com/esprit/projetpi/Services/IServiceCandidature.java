@@ -10,8 +10,6 @@ public interface IServiceCandidature {
     public Candidature postC(Candidature candidature);
 
     public List<Candidature>allCandidature();
-    public List<Candidature>filterByState(String filter);
-
-    public Candidature updateCandidate(int idc,String state);
+    public void delete(int id);
 
 }

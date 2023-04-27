@@ -6,6 +6,13 @@ import {CandidatAddComponent} from './Components/candidat-add/candidat-add.compo
 import {FormsModule} from "@angular/forms";
 import {ListCandidatComponent} from './Components/list-candidat/list-candidat.component';
 import {DataTablesModule} from "angular-datatables";
+import {RouterModule, Routes} from "@angular/router";
+import {HttpClientModule} from "@angular/common/http";
+
+const appRoutes: Routes = [
+  { path: '', component: ListCandidatComponent },
+  { path: 'create', component: CandidatAddComponent },
+];
 
 @NgModule({
   declarations: [
@@ -16,6 +23,8 @@ import {DataTablesModule} from "angular-datatables";
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
     DataTablesModule
   ],
   providers: [],

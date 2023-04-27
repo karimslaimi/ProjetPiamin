@@ -1,4 +1,5 @@
-<table datatable [dtOptions]="dtOptions" class="row-border hover">
+
+<table datatable [dtOptions]="dtOptions" class="row-border hover" >
   <thead>
   <tr>
     <th>ID</th>
@@ -6,6 +7,7 @@
     <th>Phone</th>
     <th>Education</th>
     <th>Experience</th>
+    <th>Delete</th>
   </tr>
   </thead>
   <tbody>
@@ -15,6 +17,7 @@
     <td>{{ item.phone }}</td>
     <td>{{ item.education }}</td>
     <td>{{ item.experience }}</td>
+    <td><button (click)="deleteC(item.id)" >delete</button></td>
   </tr>
   </tbody>
 </table>

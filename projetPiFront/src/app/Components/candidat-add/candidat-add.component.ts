@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {candidat} from "../../Model/candidat";
 import {CandidatService} from "../../Service/candidat.service";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-candidat-add',
@@ -11,7 +12,7 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
 export class CandidatAddComponent {
 
 
-  constructor(private candidatService:CandidatService) {
+  constructor(private candidatService:CandidatService, private router:Router) {
   }
 
   model = new candidat();
@@ -21,10 +22,11 @@ export class CandidatAddComponent {
         next:()=> {
           console.log(this);
           alert("done");
+          this.router.navigate(['/']);
         },
         error: ()=>{
           console.log(this);
-          alert(this);
+          alert("error");
         }
       });
 

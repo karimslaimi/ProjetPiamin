@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {CandidatService} from "../../Service/candidat.service";
 
-import {Subject} from "rxjs";
+import {async, Observable, of, Subject} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-candidat',
@@ -9,11 +10,11 @@ import {Subject} from "rxjs";
   styleUrls: ['./list-candidat.component.css']
 })
 export class ListCandidatComponent {
-  items: any;
+  items!: any;
   dtOptions: DataTables.Settings = {};
   dtColumns: any[] = [];
 
-  constructor(private candidatService: CandidatService) { }
+  constructor(private candidatService: CandidatService, private router:Router) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -32,6 +33,20 @@ export class ListCandidatComponent {
     ];
 
     this.candidatService.getAll()
-      .subscribe(items => this.items = items);
+      .subscribe(items => {
+        this.items = items;
+      });
   }
+
+  deleteC(id:any){
+    this.candidatService.delete(id).subscribe({
+      next:()=> {
+        alert("done");
+        this.router.navigate(["/"])
+      },error:()=>{
+        this.candidatService.getAll();
+      }
+    });
+  }
+
 }

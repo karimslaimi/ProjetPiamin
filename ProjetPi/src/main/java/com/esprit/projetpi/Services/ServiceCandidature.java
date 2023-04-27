@@ -35,19 +35,10 @@ public class ServiceCandidature implements IServiceCandidature {
     }
 
     @Override
-    public List<Candidature> filterByState(String filter) {
-        return candidatureRepository.filterByState(filter);
+    public void delete(int id) {
+        Candidature candidature = this.candidatureRepository.getById(id);
+        candidatureRepository.delete(candidature);
     }
 
 
-    @Override
-    public Candidature updateCandidate(int idc, String state) {
-        Candidature candidature = candidatureRepository.findById(idc).orElse(null);
-        if (candidature == null) {
-            return null;
-        } else {
-            candidature.setState(state);
-            return candidatureRepository.save(candidature);
-        }
-    }
 }

@@ -6,7 +6,7 @@ import {candidat} from "../Model/candidat";
   providedIn: 'root'
 })
 export class CandidatService {
-  readonly API_URL = 'http://localhost:8080';
+  readonly API_URL = 'http://localhost:8080/candidature';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -16,5 +16,9 @@ export class CandidatService {
 
   getAll() {
     return this.httpClient.get(`${this.API_URL}/all`)
+  }
+
+  delete(id: any) {
+    return this.httpClient.delete(`${this.API_URL}/deletec/${id}`);
   }
 }

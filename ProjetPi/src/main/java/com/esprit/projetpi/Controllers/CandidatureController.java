@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("candidature")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CandidatureController {
     private IServiceCandidature serviceCandidature;
 
@@ -49,23 +50,13 @@ public class CandidatureController {
         return new ResponseEntity<>(serviceCandidature.allCandidature(),HttpStatus.ACCEPTED);
     }
 
-
-    @Operation(summary = "filter by state",description = "filter the applications by the state of application (accepted/refused/on hold)")
-    @GetMapping("/filter")
-    public ResponseEntity<?> filterByState(@RequestParam(name="filter")String filter){
-        return new ResponseEntity<>(serviceCandidature.filterByState(filter),HttpStatus.OK);
-    }
-
-
-
-    @Operation(summary = "update application's state",description = "update an application state relative to the id make it accepted/refused or on hold ")
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateCandidate(@RequestParam(name="state")String state,@PathVariable int id){
-        Candidature c=serviceCandidature.updateCandidate(id,state);
-        if(c==null){
-            return new ResponseEntity<>("error occured",HttpStatus.BAD_REQUEST);
-        }else{
-            return new ResponseEntity<>(c,HttpStatus.OK);
+    @Operation(summary = "delete candidature",description = "delete application")
+    @DeleteMapping("/deletec/{id}")
+     public ResponseEntity<?> deleteCandidature(@PathVariable("id") int id){
+        if (id != 0){
+            serviceCandidature.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-    }
+        return new ResponseEntity<>("error not found", HttpStatus.BAD_REQUEST);
+     }
 }
